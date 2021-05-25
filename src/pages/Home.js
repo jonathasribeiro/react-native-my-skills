@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,9 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export function Home() {
+  const [newSkill, setNewSkill] = useState('');
+  const [mySkills, setMySkills] = useState([]);
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -21,6 +24,14 @@ export function Home() {
     color: isDarkMode ? Colors.light : Colors.dark,
   };
 
+  const backgroundGrid = {
+    backgroundColor: isDarkMode ? '#1f1e25' : '#999999',
+  };
+
+  function handleAddNewSkill() {
+    setMySkills(oldState => [...oldState, newSkill]);
+  }
+
   return (
     <View style={[backgroundStyle, styles.container]}>
       <Text style={[styles.title, textColor]}>Welcome, Jonathas.</Text>
@@ -29,9 +40,13 @@ export function Home() {
         style={styles.input}
         placeholder="New skill"
         placeholderTextColor="#555"
+        onChangeText={setNewSkill}
       />
 
-      <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.7}
+        onPress={handleAddNewSkill}>
         <Text style={styles.buttontText}>Add</Text>
       </TouchableOpacity>
 
@@ -40,11 +55,19 @@ export function Home() {
           styles.title,
           textColor,
           {
-            marginTop: 20,
+            marginVertical: 50,
           },
         ]}>
         My Skills
       </Text>
+
+      {mySkills.map(skill => (
+        <TouchableOpacity
+          key={skill + Math.random()}
+          style={[backgroundGrid, styles.buttonSkill]}>
+          <Text style={[textColor, styles.textSkill]}>{skill}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }
@@ -79,5 +102,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 17,
     fontWeight: 'bold',
+  },
+  textSkill: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  buttonSkill: {
+    borderRadius: 15,
+    padding: 15,
+    alignItems: 'center',
+    marginVertical: 10,
   },
 });
