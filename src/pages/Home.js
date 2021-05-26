@@ -6,9 +6,11 @@ import {
   useColorScheme,
   TextInput,
   Platform,
-  TouchableOpacity,
 } from 'react-native';
+
+import {Button} from '../components/Button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {SkillCard} from '../components/SkillCard';
 
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
@@ -22,10 +24,6 @@ export function Home() {
 
   const textColor = {
     color: isDarkMode ? Colors.light : Colors.dark,
-  };
-
-  const backgroundGrid = {
-    backgroundColor: isDarkMode ? '#1f1e25' : '#999999',
   };
 
   function handleAddNewSkill() {
@@ -43,12 +41,7 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <TouchableOpacity
-        style={styles.button}
-        activeOpacity={0.7}
-        onPress={handleAddNewSkill}>
-        <Text style={styles.buttontText}>Add</Text>
-      </TouchableOpacity>
+      <Button onPress={handleAddNewSkill} />
 
       <Text
         style={[
@@ -62,11 +55,7 @@ export function Home() {
       </Text>
 
       {mySkills.map(skill => (
-        <TouchableOpacity
-          key={skill + Math.random()}
-          style={[backgroundGrid, styles.buttonSkill]}>
-          <Text style={[textColor, styles.textSkill]}>{skill}</Text>
-        </TouchableOpacity>
+        <SkillCard key={skill + Math.random()} skill={skill} />
       ))}
     </View>
   );
@@ -90,27 +79,5 @@ const styles = StyleSheet.create({
     padding: Platform.OS === 'ios' ? 15 : 10,
     marginTop: 30,
     borderRadius: 7,
-  },
-  button: {
-    backgroundColor: '#a370f7',
-    padding: 15,
-    borderRadius: 7,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  buttontText: {
-    color: '#fff',
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  textSkill: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  buttonSkill: {
-    borderRadius: 15,
-    padding: 15,
-    alignItems: 'center',
-    marginVertical: 10,
   },
 });
