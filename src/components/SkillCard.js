@@ -5,8 +5,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 export function SkillCard({skill}) {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundGrid = {
-    backgroundColor: isDarkMode ? '#1f1e25' : '#999999',
+  const backgroundInput = {
+    backgroundColor: isDarkMode ? '#1F1e25' : '#cccccc',
+    color: isDarkMode ? '#ffffff' : '#000000',
   };
 
   const textColor = {
@@ -14,7 +15,7 @@ export function SkillCard({skill}) {
   };
 
   return (
-    <TouchableOpacity style={[backgroundGrid, styles.buttonSkill]}>
+    <TouchableOpacity style={[backgroundInput, styles.buttonSkill]}>
       <Text style={[textColor, styles.textSkill]}>{skill}</Text>
     </TouchableOpacity>
   );

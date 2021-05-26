@@ -28,6 +28,11 @@ export function Home() {
     color: isDarkMode ? Colors.light : Colors.dark,
   };
 
+  const backgroundInput = {
+    backgroundColor: isDarkMode ? '#1F1e25' : '#cccccc',
+    color: isDarkMode ? '#ffffff' : '#000000',
+  };
+
   function handleAddNewSkill() {
     setMySkills(oldState => [...oldState, newSkill]);
   }
@@ -50,7 +55,7 @@ export function Home() {
       <Text style={textColor}>{greetting}</Text>
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, backgroundInput]}
         placeholder="New skill"
         placeholderTextColor="#555"
         onChangeText={setNewSkill}
@@ -90,8 +95,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
-    backgroundColor: '#1F1e25',
-    color: '#fff',
     fontSize: 18,
     padding: Platform.OS === 'ios' ? 15 : 10,
     marginTop: 30,
