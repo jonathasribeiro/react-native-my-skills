@@ -1,8 +1,18 @@
 import React from 'react';
-import {TouchableOpacity, Text, useColorScheme, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  useColorScheme,
+  StyleSheet,
+  TouchableOpacityProps,
+} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-export function SkillCard({skill}) {
+interface SkillCardProps extends TouchableOpacityProps {
+  skill: string;
+}
+
+export function SkillCard({skill, ...rest}: SkillCardProps) {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundInput = {
@@ -15,7 +25,7 @@ export function SkillCard({skill}) {
   };
 
   return (
-    <TouchableOpacity style={[backgroundInput, styles.buttonSkill]}>
+    <TouchableOpacity style={[backgroundInput, styles.buttonSkill]} {...rest}>
       <Text style={[textColor, styles.textSkill]}>{skill}</Text>
     </TouchableOpacity>
   );
